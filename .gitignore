@@ -1,0 +1,33 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Spring Boot
+/target/
+*.log
+
+# Maven
+/.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# IDEs
+/.idea/
+*.iws
+*.ipr
+*.iml
+.vscode/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
