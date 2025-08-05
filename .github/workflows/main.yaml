@@ -1,0 +1,35 @@
+name: CI
+
+on:
+    push:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up JDK from pom.xml
+              uses: actions/setup-java@v3
+              with:
+                distribution: 'temurin'
+                java-version: ${{ steps.detect-java-version.outputs.java-version }}
+
+            - name: Detect Java version from pom.xml
+              id: detect-java-version
+              run: |
+                JAVA_VERSION=$(xmllint --xpath "string(//maven.compiler.source)" pom.xml)
+                if [ -z "$JAVA_VERSION" ]; then
+                  JAVA_VERSION=$(xmllint --xpath "string(//properties/java.version)" pom.xml)
+                fi
+                echo "java-version=$JAVA_VERSION" >> $GITHUB_OUTPUT
+
+            - name: Build and package web application (skip tests)
+              run: mvn clean package -DskipTests
+
+            - name: Upload JAR artifact
+              uses: actions/upload-artifact@v3
+              with:
+                name: app-jar
+                path: target/*.jar
