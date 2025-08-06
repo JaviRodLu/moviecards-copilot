@@ -10,12 +10,6 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v3
 
-            - name: Set up JDK from pom.xml
-              uses: actions/setup-java@v3
-              with:
-                distribution: 'temurin'
-                java-version: ${{ steps.detect-java-version.outputs.java-version }}
-
             - name: Detect Java version from pom.xml
               id: detect-java-version
               run: |
@@ -24,6 +18,12 @@ jobs:
                   JAVA_VERSION=$(xmllint --xpath "string(//properties/java.version)" pom.xml)
                 fi
                 echo "java-version=$JAVA_VERSION" >> $GITHUB_OUTPUT
+
+            - name: Set up JDK from pom.xml
+              uses: actions/setup-java@v3
+              with:
+                distribution: 'temurin'
+                java-version: ${{ steps.detect-java-version.outputs.java-version }}
 
             - name: Build and package web application (skip tests)
               run: mvn clean package -DskipTests
