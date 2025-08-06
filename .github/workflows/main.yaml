@@ -20,6 +20,9 @@ jobs:
                 if [ -z "$JAVA_VERSION" ]; then
                   JAVA_VERSION=$(xmllint --xpath "string(//properties/java.version)" pom.xml)
                 fi
+                if [ -z "$JAVA_VERSION" ]; then
+                  JAVA_VERSION="17"
+                fi
                 echo "java-version=$JAVA_VERSION" >> $GITHUB_OUTPUT
 
             - name: Set up JDK from pom.xml
