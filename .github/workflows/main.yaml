@@ -44,7 +44,7 @@ jobs:
               run: |
                 sudo apt-get update
                 sudo apt-get install -y chromium-chromedriver
-                sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
+                sudo ln -sf /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
 
             - name: Start application
               run: nohup mvn spring-boot:run &
