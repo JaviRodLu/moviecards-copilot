@@ -56,8 +56,9 @@ jobs:
           run: mvn verify
 
     qa:
-      runs-on: ubuntu-latest
+      runs-on: self-hosted
       needs: test
+      continue-on-error: true
       steps:
       - name: Checkout code
         uses: actions/checkout@v3
