@@ -74,9 +74,8 @@ jobs:
       - name: SonarQube Scan
         env:
           SONAR_HOST_URL: http://localhost:9000
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: squ_2e5e92982d966b8f4e8e3b2eb837a4d8a4747f28
         run: |
           mvn sonar:sonar \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN
-            
