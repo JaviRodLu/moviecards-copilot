@@ -100,5 +100,5 @@ jobs:
           with:
             app-name: 'moviecards-tfmcopilot'
             publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_432A85A1424D4AA7A2D73E43E1EFC014 }}
-            package: ./artifact/*.jar
+            package: '*.jar'
       
