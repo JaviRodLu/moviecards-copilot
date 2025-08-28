@@ -80,3 +80,22 @@ jobs:
           mvn sonar:sonar \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN
+
+    deploy:
+      runs-on: ubuntu-latest
+      needs: qa
+      if: github.ref == 'refs/heads/master'
+      steps:
+        - name: Download JAR artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: app-jar
+            path: ./artifact
+
+        - name: Deploy to Azure Web App
+          uses: azure/webapps-deploy@v3
+          with:
+            app-name: 'moviecards-tfmcopilot'
+            publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_432A85A1424D4AA7A2D73E43E1EFC014 }}
+            package: target/*.jar
+      
