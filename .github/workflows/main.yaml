@@ -92,6 +92,9 @@ jobs:
             name: app-jar
             path: ./artifact
 
+        - name: List files in artifact directory
+          run: ls -l ./artifact
+
         - name: Deploy to Azure Web App
           uses: azure/webapps-deploy@v3
           with:
