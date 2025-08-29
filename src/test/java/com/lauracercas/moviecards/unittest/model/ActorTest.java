@@ -48,7 +48,6 @@ public class ActorTest {
         String countryExample = "Sample country";
         actor.setCountry(countryExample);
         assertEquals(countryExample, actor.getCountry());
-
     }
 
     @Test
